@@ -102,8 +102,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        $countries = Country::all();
-        return view('admin.page.order.show', compact('order', 'countries'));
+        return view('admin.page.order.show', compact('order'));
     }
 
     /**
@@ -114,7 +113,8 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        return view('admin.page.order.edit', compact('order'));
+        $countries = Country::all();
+        return view('admin.page.order.edit', compact('order', 'countries'));
     }
 
     /**
