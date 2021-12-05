@@ -29,7 +29,7 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Order::with('country')->query();
+            $data = Order::with('country');
             return Datatables::eloquent($data)
                 ->filter(function ($query) {
 
