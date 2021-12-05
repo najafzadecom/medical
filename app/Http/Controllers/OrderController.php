@@ -29,7 +29,7 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Order::query();
+            $data = Order::with('country')->query();
             return Datatables::eloquent($data)
                 ->filter(function ($query) {
 
@@ -56,6 +56,9 @@ class OrderController extends Controller
                         </div>
                     </div>';
                     return $btn;
+                })
+                ->addColumn('country', function ($row) {
+                    return $row->country ? $row->country->name : '';
                 })
                 ->addColumn('barcode', function ($row) {
                     return DNS1DFacade::getBarcodeHTML($row->id, 'UPCA');

@@ -24,7 +24,7 @@ class Order extends Model
         'customer'
     ];
 
-    public function country_name()
+    public function country()
     {
         return $this->belongsTo(Country::class, 'country_id', 'id');
     }
