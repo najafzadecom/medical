@@ -96,7 +96,7 @@
                         <div class="form-group row">
                             <label class="col-form-label col-lg-2">Sifarişçi:</label>
                             <div class="col-lg-10">
-                                <input type="text" name="customer" value="{{ old('customer', $order_customer) }}" class="form-control">
+                                <input type="text" name="customer" value="{{ old('customer', $order->customer) }}" class="form-control">
                             </div>
                         </div>
                     </fieldset>
