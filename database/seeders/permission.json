@@ -1,0 +1,17 @@
+[
+  "order-list",
+  "order-create",
+  "order-edit",
+  "order-delete",
+  "order-show",
+  "role-list",
+  "role-create",
+  "role-edit",
+  "role-delete",
+  "role-show",
+  "user-list",
+  "user-create",
+  "user-edit",
+  "user-delete",
+  "user-show"
+]
