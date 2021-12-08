@@ -24,6 +24,8 @@ Route::group([
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
     Route::get('logout', 'AuthController@logout')->name('logout');
 
+    Route::get('order/{order}/print', 'OrderController@print')->name('order.print');
+
     Route::resources([
         'order' => 'OrderController',
         'user' => 'UserController',

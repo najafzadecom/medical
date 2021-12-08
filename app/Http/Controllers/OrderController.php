@@ -38,17 +38,31 @@ class OrderController extends Controller
                         $query->where('id', '=', request('primary_key'));
                     }
 
+                    if(auth()->user()->hasRole('Registrator')) {
+                        $query->whereIn('status', [0, 3]);
+                    } elseif(auth()->user()->hasRole('Laboperator')) {
+                        $query->where('status', 1);
+                    } elseif(auth()->user()->hasRole('Manager')) {
+                        $query->whereIn('status', [2]);
+                    }
+
+                    $query->orderBy('created_at', 'desc');
+
 
                 })->smart(false)->startsWithSearch()
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $btn = '<div class="btn-group btn-group-justified">
                         <div class="btn-group">
-                            <a href="'.route('order.show', $row->id).'"  class="show btn btn-light btn-sm"><i class="icon-eye2"></i></a>
+                            <a target="_blank" href="'.route('order.show', $row->id).'"  class="show btn btn-light btn-sm"><i class="icon-eye2"></i></a>
                         </div>
 
                         <div class="btn-group">
-                            <a href="'.route('order.edit', $row->id).'"  class="edit btn btn-light btn-sm"><i class="icon-pencil"></i></a>
+                            <a target="_blank" href="'.route('order.print', $row->id).'"  class="show btn btn-light btn-sm"><i class="icon-printer4"></i></a>
+                        </div>
+
+                        <div class="btn-group">
+                            <a target="_blank" href="'.route('order.edit', $row->id).'"  class="edit btn btn-light btn-sm"><i class="icon-pencil"></i></a>
                         </div>
 
                         <div class="btn-group">
@@ -144,5 +158,10 @@ class OrderController extends Controller
             return response()->json(['success' => true]);
         }
         return response()->json(['success' => false]);
+    }
+
+    public function print(Order $order)
+    {
+        return view('admin.page.order.print', compact('order'));
     }
 }

@@ -53,7 +53,7 @@
                         <div class="form-group row">
                             <label class="col-form-label col-lg-2">Ölkə:</label>
                             <div class="col-lg-10">
-                                <select name="country" class="select-search">
+                                <select name="country_id" class="select-search">
                                     <option value="">Ölkə seçin</option>
                                     @foreach($countries as $country)
                                         <option @if(old('country_id') == $country->id) selected="selected" @endif value="{{ $country->id }}">{{ $country->name }}</option>
@@ -100,6 +100,9 @@
                     </fieldset>
                     <div class="text-right">
                         <button type="submit" class="btn btn-primary">Yadda saxla</button>
+                        @hasrole('Registrator')
+                            <button type="submit" name="status" value="1" class="btn btn-primary">Laboperatora ötür</button>
+                        @endrole
                     </div>
                 </form>
             </div>

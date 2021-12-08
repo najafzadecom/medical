@@ -31,7 +31,7 @@
                         <div class="col-lg-10">
                             @if(!$permissions->isEmpty())
                                 @foreach($permissions as $permission)
-                                    <input type="checkbox" name="permissions" value="{{ $permission->id }}"> {{ $permission->name }}
+                                    <input type="checkbox" name="permissions[]" value="{{ $permission->id }}"> {{ $permission->name }} <br/>
                                 @endforeach
                             @endif
                         </div>

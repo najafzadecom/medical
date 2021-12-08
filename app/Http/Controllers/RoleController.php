@@ -16,10 +16,10 @@ class RoleController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index','store']]);
-        $this->middleware('permission:role-create', ['only' => ['create','store']]);
-        $this->middleware('permission:role-edit', ['only' => ['edit','update']]);
-        $this->middleware('permission:role-delete', ['only' => ['destroy']]);
+//        $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index','store']]);
+//        $this->middleware('permission:role-create', ['only' => ['create','store']]);
+//        $this->middleware('permission:role-edit', ['only' => ['edit','update']]);
+//        $this->middleware('permission:role-delete', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.
@@ -89,7 +89,7 @@ class RoleController extends Controller
     public function store(StoreRoleRequest $request)
     {
         $role = Role::create($request->all());
-        $role->syncPermissions($request->input('permission'));
+        $role->syncPermissions($request->input('permissions'));
 
         return redirect()->route('role.index')->with(['message' => 'Müvəffəqiyyətlə yaradıldı.']);
     }
@@ -127,7 +127,7 @@ class RoleController extends Controller
     public function update(UpdateRoleRequest $request, Role $role)
     {
         $role->update($request->all());
-        $role->syncPermissions($request->input('permission'));
+        $role->syncPermissions($request->input('permissions'));
         return redirect()->route('role.index')->with(['message' => 'Müvəffəqiyyətlə yeniləndi.']);
     }
 

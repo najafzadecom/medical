@@ -158,11 +158,7 @@ class UserController extends Controller
         }
 
         $user->update($input);
-
-
-
-
-        $user->assignRole($request->input('roles'));
+        $user->syncRoles($request->input('roles'));
 
         if ($request->get('password')){
             $user->update(['password' => Hash::make($request->get('password'))]);

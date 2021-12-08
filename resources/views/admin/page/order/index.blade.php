@@ -4,6 +4,9 @@
     <!-- Content area -->
     <div class="content">
         <div class="card">
+            <div class="card-header">
+                <input class="form-control" type="text" name="order_id" id="order_id" value="" placeholder="Barkod oxuyucu" autofocus>
+            </div>
             <div class="card-header bg-transparent header-elements-inline py-0">
                 <h6 class="card-title py-3">Sifarişlər</h6>
                 <div class="header-elements">
@@ -72,6 +75,14 @@
     <!-- /content area -->
 
     <script type="text/javascript">
+        var input = document.getElementById("order_id");
+        input.addEventListener("keyup", function(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                window.location.href = 'order/'+input.value+'/edit';
+            }
+        });
+
         let Datatables = function() {
 
             let _componentDatatableButtons = function() {

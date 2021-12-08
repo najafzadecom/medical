@@ -21,7 +21,9 @@ class Order extends Model
         'production_date',
         'expire_date',
         'release_date',
-        'customer'
+        'customer',
+        'status',
+        'protocol'
     ];
 
     public function country()

@@ -28,7 +28,7 @@
                 </div>
                 <div class="d-sm-flex flex-sm-wrap mb-3">
                     <div class="font-weight-semibold width-100">Ölkə: </div>
-                    <div class="mt-2 mt-sm-0">{{ $order->country }}</div>
+                    <div class="mt-2 mt-sm-0">{{ $order->country->name ?? "" }}</div>
                 </div>
                 <div class="d-sm-flex flex-sm-wrap mb-3">
                     <div class="font-weight-semibold width-100">Qablaşdırma: </div>
@@ -54,9 +54,30 @@
                     <div class="font-weight-semibold width-100">Sifarişçi: </div>
                     <div class="mt-2 mt-sm-0">{{ $order->customer }}</div>
                 </div>
+                @hasanyrole('Manager|Laboperator')
+                <div class="d-sm-flex flex-sm-wrap mb-3">
+                    <div class="font-weight-semibold width-100">Protokol: </div>
+                    <div class="mt-2 mt-sm-0">{{ $order->protocol }}</div>
+                </div>
+                @endrole
                 <div class="d-sm-flex flex-sm-wrap mb-3">
                     <div class="font-weight-semibold width-100">Barkod: </div>
                     <div class="mt-2 mt-sm-0">{!! DNS1D::getBarcodeHTML($order->id, 'UPCA') !!}</div>
+                </div>
+
+                <div class="d-sm-flex flex-sm-wrap mb-3">
+                    <div class="font-weight-semibold width-100">Status </div>
+                    <div class="mt-2 mt-sm-0">
+                        @if($order->status == 0)
+                            <span class="badge badge-success">Registrator</span>
+                        @elseif($order->status == 1)
+                            <span class="badge badge-success">Laboperator</span>
+                        @elseif($order->status == 2)
+                            <span class="badge badge-success">Manager</span>
+                        @elseif($order->status == 3)
+                            <span class="badge badge-success">Təsdiqləndi</span>
+                        @endif
+                    </div>
                 </div>
 
             </div>
