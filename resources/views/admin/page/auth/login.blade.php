@@ -71,7 +71,7 @@
                             </span>
                             @enderror
                         </div>
-
+                        @if(session('attempt', 0) > 2)
                         <div class="form-group form-group-feedback form-group-feedback-left">
                             {!! captcha_img() !!}
                             <input type="text" class="form-control @error('captcha') is-invalid @enderror" name="captcha" placeholder="Təhlükəsizlik kodu" autocomplete="new-captcha">
@@ -81,6 +81,7 @@
                             </span>
                             @enderror
                         </div>
+                        @endif
                         <div class="form-group d-flex align-items-center">
                             <div class="form-check mb-0">
                                 <label class="form-check-label">

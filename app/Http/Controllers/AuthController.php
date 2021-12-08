@@ -20,16 +20,21 @@ class AuthController extends Controller {
         $rules = [
             'email'   => 'required|email',
             'password'=> 'required',
-            'captcha' => 'required|captcha'
+            'captcha' => session('attempt', 0) > 2 ? 'required|captcha' : ''
         ];
         $validator = Validator::make(request()->all(), $rules);
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
 
+        $attempt = session('attempt', '0');
+
         if (Auth::attempt($request->only(['email', 'password']))) {
+            session(['attempt' => 0]);
             return redirect()->route('dashboard');
         } else {
+
+            session(['attempt' => $attempt+1]);
             return redirect()->back()->with(['message' => 'Giriş cəhdi uğursuz', 'type' => 'danger']);
         }
     }
