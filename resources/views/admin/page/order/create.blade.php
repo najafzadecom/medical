@@ -27,12 +27,6 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-form-label col-lg-2">Nümunənin qəbul tarixi/vaxtı:</label>
-                            <div class="col-lg-10">
-                                <input type="datetime-local" name="date" placeholder="Nümunənin qəbul tarixi/vaxtı" value="{{ old('date') }}" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group row">
                             <label class="col-form-label col-lg-2">Nümunənin laboratoriyaya daxil olma zamanı temperaturu:</label>
                             <div class="col-lg-10">
                                 <input type="number" min="0" name="temperature" placeholder="Nümunənin laboratoriyaya daxil olma zamanı temperaturu" value="{{ old('temperature') }}" class="form-control">
@@ -64,7 +58,12 @@
                         <div class="form-group row">
                             <label class="col-form-label col-lg-2">Qablaşdırma:</label>
                             <div class="col-lg-10">
-                                <input type="text" name="package" placeholder="Qablaşdırma" value="{{ old('package') }}" class="form-control">
+                                <select name="package_id" class="select-search">
+                                    <option value="">Qablaşdırma seçin</option>
+                                    @foreach($packages as $package)
+                                        <option @if(old('package_id') == $package->id) selected="selected" @endif value="{{ $package->id }}">{{ $package->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -86,17 +85,25 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-form-label col-lg-2">Sınaq protokolunun çıxma tarixi:</label>
-                            <div class="col-lg-10">
-                                <input type="date" name="release_date" value="{{ old('release_date') }}" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group row">
                             <label class="col-form-label col-lg-2">Sifarişçi:</label>
                             <div class="col-lg-10">
                                 <input type="text" name="customer" value="{{ old('customer') }}" class="form-control">
                             </div>
                         </div>
+                    </fieldset>
+                    <fieldset>
+                       <div class="row">
+                           @foreach($experiments as $key => $experiment)
+                               @if(!$experiment->isEmpty())
+                                   <div class="col-2">
+                                       <h4>{{ config('app.experiment_type')[$key] }}</h4>
+                                       @foreach($experiment as $exp)
+                                           <input type="checkbox" name="experiments[]" value="{{ $exp->id }}" class="styled"> {{ $exp->name }} <br/>
+                                       @endforeach
+                                   </div>
+                               @endif
+                           @endforeach
+                       </div>
                     </fieldset>
                     <div class="text-right">
                         <button type="submit" class="btn btn-primary">Yadda saxla</button>

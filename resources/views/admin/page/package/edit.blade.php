@@ -1,6 +1,6 @@
 @extends('admin.layout.app')
-@section('module', 'Rollar')
-@section('title', $role->name)
+@section('module', 'Qablaşdırma')
+@section('title', $package->name)
 @section('content')
 
     <div class="card">
@@ -16,26 +16,15 @@
                     </div>
                 @endforeach
             @endif
-            <form action="{{ route('role.update', $role->id) }}" method="POST">
+            <form action="{{ route('package.update', $package->id) }}" method="POST">
                 @csrf
-                <input type="hidden" value="{{ $role->id }}" name="id">
+                <input type="hidden" value="{{ $package->id }}" name="id">
                 {{ method_field('PUT') }}
                 <fieldset>
                     <div class="form-group row">
                         <label class="col-form-label col-lg-2">Adı</label>
                         <div class="col-lg-10">
-                            <input type="text" name="name" placeholder="Adı" value="{{ old('name', $role->name) }}" class="form-control" required>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label class="col-form-label col-lg-2">İcazələr</label>
-                        <div class="col-lg-10">
-                            @if(!$permissions->isEmpty())
-                                @foreach($permissions as $permission)
-                                    <input type="checkbox" name="permissions[]" value="{{ $permission->id }}"  {{ in_array($permission->id, $role->permissions()->pluck('id')->toArray()) ? 'checked' : '' }}> {{ $permission->name }}<br/>
-                                @endforeach
-                            @endif
+                            <input type="text" name="name" placeholder="Adı" value="{{ old('name', $package->name) }}" class="form-control" required>
                         </div>
                     </div>
 

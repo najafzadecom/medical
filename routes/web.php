@@ -27,9 +27,12 @@ Route::group([
     Route::get('order/{order}/print', 'OrderController@print')->name('order.print');
 
     Route::resources([
-        'order' => 'OrderController',
-        'user' => 'UserController',
-        'role' => 'RoleController'
+        'order'         => 'OrderController',
+        'user'          => 'UserController',
+        'role'          => 'RoleController',
+        'package'       => 'PackageController',
+        'experiment'    => 'ExperimentController',
+        'log'           => 'LogController'
     ]);
 });
 

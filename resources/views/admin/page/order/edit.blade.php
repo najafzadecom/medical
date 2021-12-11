@@ -31,7 +31,7 @@
                         <div class="form-group row">
                             <label class="col-form-label col-lg-2">Nümunənin qəbul tarixi/vaxtı:</label>
                             <div class="col-lg-10">
-                                <input type="datetime-local" name="date" placeholder="Nümunənin qəbul tarixi/vaxtı" value="{{ old('date', $order->date) }}" class="form-control" @hasrole('Laboperator') readonly="readonly" @endrole>
+                                <input type="datetime-local" name="date" placeholder="Nümunənin qəbul tarixi/vaxtı" value="{{ old('date', $order->date) }}" class="form-control" readonly="readonly">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -55,7 +55,7 @@
                         <div class="form-group row">
                             <label class="col-form-label col-lg-2">Ölkə:</label>
                             <div class="col-lg-10">
-                                <select name="country_id" class="select-search" @hasrole('Laboperator') readonly="readonly" @endrole>
+                                <select name="country_id" class="select-search" @hasrole('Laboperator') readonly="readonly" @endrole >
                                     <option value="">Ölkə seçin</option>
                                     @foreach($countries as $country)
                                         <option @if(old('country_id', $order->country_id) == $country->id) selected="selected" @endif value="{{ $country->id }}">{{ $country->name }}</option>
@@ -66,7 +66,12 @@
                         <div class="form-group row">
                             <label class="col-form-label col-lg-2">Qablaşdırma:</label>
                             <div class="col-lg-10">
-                                <input type="text" name="package" placeholder="Qablaşdırma" value="{{ old('package', $order->package) }}" class="form-control" @hasrole('Laboperator') readonly="readonly" @endrole>
+                                <select name="package_id" class="select-search" @hasrole('Laboperator') readonly="readonly" @endrole >
+                                    <option value="">Qablaşdırma seçin</option>
+                                    @foreach($packages as $package)
+                                        <option @if(old('package_id', $order->package_id) == $package->id) selected="selected" @endif value="{{ $package->id }}">{{ $package->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -87,12 +92,16 @@
                                 <input type="date" name="expire_date" value="{{ old('expire_date', $order->expire_date) }}" class="form-control" @hasrole('Laboperator') readonly="readonly" @endrole>
                             </div>
                         </div>
+
+                        @hasrole('Manager')
                         <div class="form-group row">
                             <label class="col-form-label col-lg-2">Sınaq protokolunun çıxma tarixi:</label>
                             <div class="col-lg-10">
-                                <input type="date" name="release_date" value="{{ old('release_date', $order->release_date) }}" class="form-control" @hasrole('Laboperator') readonly="readonly" @endrole>
+                                <input type="date" name="release_date" value="{{ old('release_date', $order->release_date) }}" class="form-control">
                             </div>
                         </div>
+                        @endrole
+
                         <div class="form-group row">
                             <label class="col-form-label col-lg-2">Sifarişçi:</label>
                             <div class="col-lg-10">
@@ -107,6 +116,28 @@
                             </div>
                         </div>
                         @endrole
+
+                        <div class="form-group row">
+                            <label class="col-form-label col-lg-2">Barkod:</label>
+                            <div class="col-lg-10">
+                                {!! DNS1D::getBarcodeHTML($order->id, 'UPCA') !!}
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <div class="row">
+                            @foreach($experiments as $key => $experiment)
+                                @if(!$experiment->isEmpty())
+                                    <div class="col-2">
+                                        <h4>{{ config('app.experiment_type')[$key] }}</h4>
+                                        @foreach($experiment as $exp)
+                                            <input type="checkbox" name="experiments[]" value="{{ $exp->id }}" class="styled" @if(in_array($exp->id, old('experiments', $order->experiments))) checked="checked" @endif> {{ $exp->name }} <br/>
+                                        @endforeach
+                                    </div>
+                                @endif
+                            @endforeach
+                        </div>
                     </fieldset>
 
                     <div class="text-right">

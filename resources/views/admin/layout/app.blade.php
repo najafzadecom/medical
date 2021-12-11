@@ -115,7 +115,17 @@
                         <li class="nav-item"><a href="{{ route('order.index') }}" class="nav-link {{ request()->routeIs('order.*')  ? 'active' : ''}}"><i class="icon-cart"></i> <span>Sifariş</span></a></li>
                     @endcan
 
+                    @can('package-list')
+                        <li class="nav-item"><a href="{{ route('package.index') }}" class="nav-link {{ request()->routeIs('package.*')  ? 'active' : ''}}"><i class="icon-cube2"></i> <span>Qablaşdırma</span></a></li>
+                    @endcan
 
+                    @can('experiment-list')
+                        <li class="nav-item"><a href="{{ route('experiment.index') }}" class="nav-link {{ request()->routeIs('experiment.*')  ? 'active' : ''}}"><i class="icon-lab"></i> <span>Nümunədə aparılacaq sınaqlar</span></a></li>
+                    @endcan
+
+                    @can('log-list')
+                        <li class="nav-item"><a href="{{ route('log.index') }}" class="nav-link {{ request()->routeIs('log.*')  ? 'active' : ''}}"><i class="icon-file-text"></i> <span>Loqlar</span></a></li>
+                    @endcan
 
 
 

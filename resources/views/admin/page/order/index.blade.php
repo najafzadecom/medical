@@ -37,8 +37,22 @@
                     <th><input type="text" name="temperature" id="temperature" class="form-control" placeholder=""></th>
                     <th><input type="text" name="sample_type" id="sample_type" class="form-control" placeholder=""></th>
                     <th><input type="text" name="order_number" id="order_number" class="form-control" placeholder=""></th>
-                    <th><input type="text" name="country" id="country" class="form-control" placeholder=""></th>
-                    <th><input type="text" name="package" id="package" class="form-control" placeholder=""></th>
+                    <th>
+                        <select name="country_id" class="select-search" id="country_id">
+                            <option value="">Ölkə seçin</option>
+                            @foreach($countries as $country)
+                                <option value="{{ $country->id }}">{{ $country->name }}</option>
+                            @endforeach
+                        </select>
+                    </th>
+                    <th>
+                        <select name="package_id" class="select-search" id="package_id">
+                            <option value="">Qablaşdırma seçin</option>
+                            @foreach($packages as $package)
+                            <option value="{{ $package->id }}">{{ $package->name }}</option>
+                            @endforeach
+                        </select>
+                    </th>
                     <th><input type="text" name="weight" id="weight" class="form-control" placeholder=""></th>
                     <th><input type="text" name="production_date" id="production_date" class="form-control" placeholder=""></th>
                     <th><input type="text" name="expire_date" id="expire_date" class="form-control" placeholder=""></th>
@@ -140,8 +154,8 @@
                             d.temperature = $('#temperature').val();
                             d.sample_type = $('#sample_type').val();
                             d.order_number = $('#order_number').val();
-                            d.country = $('#country').val();
-                            d.package = $('#package').val();
+                            d.country_id = $('#country_id').val();
+                            d.package_id = $('#package_id').val();
                             d.weight = $('#weight').val();
                             d.production_date = $('#production_date').val();
                             d.expire_date = $('#expire_date').val();
@@ -186,7 +200,7 @@
             Datatables.init();
         });
 
-        $('#title, #primary_key, #status, #customer, #book, #date').on('keyup change clear', function(){
+        $('#primary_key, #status, #customer, #package_id, #country_id, #date').on('keyup change clear', function(){
             $('.data-table').DataTable().draw(true);
         });
 

@@ -1,11 +1,13 @@
 @extends('admin.layout.app')
-@section('module', 'Rollar')
-@section('title', $role->name)
+@section('module', 'Nümunədə aparılacaq sınaqlar')
+@section('title', 'Yeni')
 @section('content')
 
-    <div class="card">
+    <!-- Content area -->
+    <div class="content">
+        <div class="card">
         <div class="card-header">
-            <h6 class="card-title">Redaktə et</h6>
+
         </div>
         <div class="card-body border-top-0">
             @if ($errors->any())
@@ -16,34 +18,32 @@
                     </div>
                 @endforeach
             @endif
-            <form action="{{ route('role.update', $role->id) }}" method="POST">
+            <form action="{{ route('experiment.store') }}" method="POST">
                 @csrf
-                <input type="hidden" value="{{ $role->id }}" name="id">
-                {{ method_field('PUT') }}
                 <fieldset>
                     <div class="form-group row">
                         <label class="col-form-label col-lg-2">Adı</label>
                         <div class="col-lg-10">
-                            <input type="text" name="name" placeholder="Adı" value="{{ old('name', $role->name) }}" class="form-control" required>
+                            <input type="text" name="name" placeholder="Adı" value="{{ old('name') }}" class="form-control" required>
                         </div>
                     </div>
-
                     <div class="form-group row">
-                        <label class="col-form-label col-lg-2">İcazələr</label>
+                        <label class="col-form-label col-lg-2">Növü</label>
                         <div class="col-lg-10">
-                            @if(!$permissions->isEmpty())
-                                @foreach($permissions as $permission)
-                                    <input type="checkbox" name="permissions[]" value="{{ $permission->id }}"  {{ in_array($permission->id, $role->permissions()->pluck('id')->toArray()) ? 'checked' : '' }}> {{ $permission->name }}<br/>
+                            <select name="type" class="select-search" id="type">
+                                <option value="">Seçin</option>
+                                @foreach(config('app.experiment_type') as $key => $type)
+                                    <option @if(old('type') == $key) selected="selected" @endif value="{{ $key }}">{{ $type }}</option>
                                 @endforeach
-                            @endif
+                            </select>
                         </div>
                     </div>
-
                 </fieldset>
                 <div class="text-right">
                     <button type="submit" class="btn btn-primary">Yadda saxla</button>
                 </div>
             </form>
         </div>
+    </div>
     </div>
 @endsection

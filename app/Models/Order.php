@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Order extends Model
 {
-    use HasFactory;
+    use HasFactory, LogsActivity;
 
     protected $fillable = [
         'number',
@@ -16,18 +17,51 @@ class Order extends Model
         'sample_type',
         'order_number',
         'country_id',
-        'package',
+        'package_id',
         'weight',
         'production_date',
         'expire_date',
         'release_date',
         'customer',
         'status',
-        'protocol'
+        'created_by',
+        'updated_by',
+        'protocol',
+        'experiments'
     ];
+
+    protected $casts = [
+        'experiments'    => 'array'
+    ];
+
+    protected static $logAttributes = [
+        'number',
+        'date',
+        'temperature',
+        'sample_type',
+        'order_number',
+        'country_id',
+        'package_id',
+        'weight',
+        'production_date',
+        'expire_date',
+        'release_date',
+        'customer',
+        'status',
+        'created_by',
+        'updated_by',
+        'protocol',
+        'experiments'
+    ];
+
 
     public function country()
     {
         return $this->belongsTo(Country::class, 'country_id', 'id');
+    }
+
+    public function package()
+    {
+        return $this->belongsTo(Package::class, 'package_id', 'id');
     }
 }

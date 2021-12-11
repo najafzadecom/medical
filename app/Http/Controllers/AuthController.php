@@ -31,6 +31,7 @@ class AuthController extends Controller {
 
         if (Auth::attempt($request->only(['email', 'password']))) {
             session(['attempt' => 0]);
+            activity()->log(auth()->user()->name.' sistemə giriş etdi.');
             return redirect()->route('dashboard');
         } else {
 
@@ -41,6 +42,7 @@ class AuthController extends Controller {
 
     public function logout()
     {
+        activity()->log(auth()->user()->name.' sistemdən çıxış etdi.');
         Auth::logout();
         return redirect()->route('login')->with(['message' => 'Çıxış etdiniz', 'type' => 'success']);
     }

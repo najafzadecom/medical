@@ -21,14 +21,17 @@ class CreateOrdersTable extends Migration
             $table->string('sample_type', 255)->nullable();
             $table->bigInteger('order_number')->default(0);
             $table->unsignedInteger('country_id')->default(0);
-            $table->string('package', 255)->nullable();
+            $table->integer('package_id', 255)->default(0);
             $table->string('weight', 255)->nullable();
             $table->date('production_date')->nullable();
             $table->date('expire_date')->nullable();
             $table->date('release_date')->nullable();
             $table->string('customer', 255)->nullable();
             $table->text('protocol')->nullable();
+            $table->json('experiments')->nullable();
             $table->tinyInteger('status')->default(0);
+            $table->bigInteger('created_by')->default(0);
+            $table->bigInteger('updated_by')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

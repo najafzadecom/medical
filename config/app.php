@@ -2,6 +2,14 @@
 
 return [
 
+    'experiment_type' => [
+        '1'  => 'Bioloji',
+        '2'  => 'Kimyəvi',
+        '3'  => 'Xromotoqrafik',
+        '4'  => 'Spektroskopik',
+        '5'  => 'IFA metod',
+        '6'  => 'Digər sınaqlar'
+    ],
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -178,6 +186,7 @@ return [
         Yajra\DataTables\DataTablesServiceProvider::class,
         Mews\Captcha\CaptchaServiceProvider::class,
         Milon\Barcode\BarcodeServiceProvider::class,
+        Spatie\Activitylog\ActivitylogServiceProvider::class,
 
     ],
 

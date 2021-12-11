@@ -32,7 +32,7 @@
                 </div>
                 <div class="d-sm-flex flex-sm-wrap mb-3">
                     <div class="font-weight-semibold width-100">Qablaşdırma: </div>
-                    <div class="mt-2 mt-sm-0">{{ $order->package }}</div>
+                    <div class="mt-2 mt-sm-0">{{ $order->package ? $order->package->name : '' }}</div>
                 </div>
                 <div class="d-sm-flex flex-sm-wrap mb-3">
                     <div class="font-weight-semibold width-100">Nümunənin miqdarı: </div>

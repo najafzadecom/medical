@@ -25,16 +25,15 @@ class UpdateOrderRequest extends FormRequest
     {
         return [
             'number'                    => 'required',
-            'date'                      => 'required',
             'temperature'               => 'required',
             'sample_type'               => 'required',
             'order_number'              => 'required',
             'country_id'                => 'required',
-            'package'                   => 'required',
+            'package_id'                => 'required',
             'weight'                    => 'required',
             'production_date'           => 'required',
             'expire_date'               => 'required',
-            'release_date'              => 'required',
+            'release_date'              => auth()->user()->hasRole('Manager') ? 'required' : '',
             'customer'                  => 'required'
         ];
     }
