@@ -136,7 +136,7 @@ class OrderController extends Controller
         $input['created_by'] = auth()->user()->id;
         $input['updated_by'] = auth()->user()->id;
 
-        if(!$input['experiments']) {
+        if(!isset($input['experiments'])) {
             $input['experiments'] = [];
         }
 
