@@ -21,7 +21,7 @@ class CreateOrdersTable extends Migration
             $table->string('sample_type', 255)->nullable();
             $table->bigInteger('order_number')->default(0);
             $table->unsignedInteger('country_id')->default(0);
-            $table->integer('package_id', 255)->default(0);
+            $table->integer('package_id')->default(0);
             $table->string('weight', 255)->nullable();
             $table->date('production_date')->nullable();
             $table->date('expire_date')->nullable();
