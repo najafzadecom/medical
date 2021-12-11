@@ -33,6 +33,8 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
+
+
         $packages = Package::all();
         $countries = Country::all();
         if ($request->ajax()) {
@@ -94,7 +96,7 @@ class OrderController extends Controller
                     return $row->package ? $row->package->name : '';
                 })
                 ->addColumn('barcode', function ($row) {
-                    return DNS1DFacade::getBarcodeHTML($row->id, 'UPCA');
+                    return DNS1DFacade::getBarcodeHTML($row->number, 'UPCA');
                 })
                 ->rawColumns(['action', 'barcode'])
                 ->toJson();
@@ -139,6 +141,7 @@ class OrderController extends Controller
         }
 
         $order = Order::create($input);
+        $order->update(['number' => sprintf("%06d", $order->id)]);
 
         return redirect()->route('order.index')->with(['message' => 'Müvəffəqiyyətlə yaradıldı.']);
     }

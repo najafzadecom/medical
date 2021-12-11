@@ -7,7 +7,7 @@
     <title>Print</title>
 </head>
 <body>
-{!! DNS1D::getBarcodeSVG($order->id, 'UPCA') !!}
+{!! DNS1D::getBarcodeSVG($order->number, 'UPCA') !!}
 <script type="text/javascript">
     window.onload = function() { window.print(); }
 </script>

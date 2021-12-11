@@ -24,7 +24,6 @@ class StoreOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'number'                    => 'required',
             'temperature'               => 'required',
             'sample_type'               => 'required',
             'order_number'              => 'required',

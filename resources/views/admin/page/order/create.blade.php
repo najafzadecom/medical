@@ -21,12 +21,6 @@
                     @csrf
                     <fieldset>
                         <div class="form-group row">
-                            <label class="col-form-label col-lg-2">Laboratoriyada nümunənin qeydiyyat nömrəsi:</label>
-                            <div class="col-lg-10">
-                                <input type="text" name="number" placeholder="Laboratoriyada nümunənin qeydiyyat nömrəsi" value="{{ old('number') }}" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group row">
                             <label class="col-form-label col-lg-2">Nümunənin laboratoriyaya daxil olma zamanı temperaturu:</label>
                             <div class="col-lg-10">
                                 <input type="number" min="0" name="temperature" placeholder="Nümunənin laboratoriyaya daxil olma zamanı temperaturu" value="{{ old('temperature') }}" class="form-control">

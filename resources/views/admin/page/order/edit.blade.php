@@ -25,7 +25,7 @@
                         <div class="form-group row">
                             <label class="col-form-label col-lg-2">Laboratoriyada nümunənin qeydiyyat nömrəsi:</label>
                             <div class="col-lg-10">
-                                <input type="text" name="number" placeholder="Laboratoriyada nümunənin qeydiyyat nömrəsi" value="{{ old('number', $order->number) }}" class="form-control" @hasrole('Laboperator') readonly="readonly" @endrole>
+                                <input type="text" name="number" placeholder="Laboratoriyada nümunənin qeydiyyat nömrəsi" value="{{ old('number', $order->number) }}" class="form-control" readonly="readonly">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -120,7 +120,7 @@
                         <div class="form-group row">
                             <label class="col-form-label col-lg-2">Barkod:</label>
                             <div class="col-lg-10">
-                                {!! DNS1D::getBarcodeHTML($order->id, 'UPCA') !!}
+                                {!! DNS1D::getBarcodeHTML($order->number, 'UPCA') !!}
                             </div>
                         </div>
                     </fieldset>
