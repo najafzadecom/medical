@@ -16,10 +16,11 @@ class RoleController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:role-list|role-create|role-edit|role-delete|order-show', ['only' => ['index','store']]);
         $this->middleware('permission:role-create', ['only' => ['create','store']]);
         $this->middleware('permission:role-edit', ['only' => ['edit','update']]);
         $this->middleware('permission:role-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:role-show', ['only' => ['show']]);
     }
     /**
      * Display a listing of the resource.
@@ -44,19 +45,28 @@ class RoleController extends Controller
                 })->smart(false)->startsWithSearch()
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
-                    $btn = '<div class="btn-group btn-group-justified">
-                        <div class="btn-group">
+                    $btn = '<div class="btn-group btn-group-justified">';
+
+                    if(auth()->user()->can('role-show')) {
+                        $btn .= '<div class="btn-group">
                             <a href="'.route('role.show', $row->id).'"  class="show btn btn-light btn-sm"><i class="icon-eye2"></i></a>
-                        </div>
+                        </div>';
+                    }
 
-                        <div class="btn-group">
-                            <a href="'.route('role.edit', $row->id).'"  class="edit btn btn-light btn-sm"><i class="icon-pencil"></i></a>
-                        </div>
+                    if(auth()->user()->can('role-edit')) {
+                        $btn .= '<div class="btn-group">
+                                <a href="' . route('role.edit', $row->id) . '"  class="edit btn btn-light btn-sm"><i class="icon-pencil"></i></a>
+                            </div>';
+                    }
 
-                        <div class="btn-group">
+                    if(auth()->user()->can('role-delete')) {
+                        $btn .= '<div class="btn-group">
                             <a href="'.route('role.destroy', $row->id).'"  class="delete btn btn-light btn-sm"><i class="icon-cross"></i></a>
-                        </div>
-                    </div>';
+                        </div>';
+                    }
+
+                    $btn .= '</div>';
+
                     return $btn;
                 })
                 ->addColumn('enable', function ($row) {

@@ -47,13 +47,13 @@
                             </div>
                         @endif
                         <div class="form-group form-group-feedback form-group-feedback-left">
-                            <input type="email" class="form-control  @error('email') is-invalid @enderror" name="email"
-                                   value="{{ old('email') }}" placeholder="E-mail"
+                            <input type="text" class="form-control  @error('username') is-invalid @enderror" name="username"
+                                   value="{{ old('username') }}" placeholder="İstifadəçi adı"
                                    autocomplete="chrome-off">
                             <div class="form-control-feedback">
                                 <i class="icon-user text-muted"></i>
                             </div>
-                            @error('email')
+                            @error('username')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

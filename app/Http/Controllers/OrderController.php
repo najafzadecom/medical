@@ -21,10 +21,11 @@ class OrderController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:order-list|order-create|order-edit|order-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:order-list|order-create|order-edit|order-delete|order-show', ['only' => ['index','store']]);
         $this->middleware('permission:order-create', ['only' => ['create','store']]);
         $this->middleware('permission:order-edit', ['only' => ['edit','update']]);
         $this->middleware('permission:order-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:order-show', ['only' => ['show']]);
     }
     /**
      * Display a listing of the resource.
@@ -70,23 +71,34 @@ class OrderController extends Controller
                 })->smart(false)->startsWithSearch()
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
-                    $btn = '<div class="btn-group btn-group-justified">
-                        <div class="btn-group">
-                            <a target="_blank" href="'.route('order.show', $row->id).'"  class="show btn btn-light btn-sm"><i class="icon-eye2"></i></a>
-                        </div>
+                    $btn = '<div class="btn-group btn-group-justified">';
 
-                        <div class="btn-group">
-                            <a target="_blank" href="'.route('order.print', $row->id).'"  class="show btn btn-light btn-sm"><i class="icon-printer4"></i></a>
-                        </div>
+                    if(auth()->user()->can('order-show')) {
+                        $btn .= '<div class="btn-group">
+                            <a href="'.route('order.show', $row->id).'"  class="show btn btn-light btn-sm"><i class="icon-eye2"></i></a>
+                        </div>';
+                    }
 
-                        <div class="btn-group">
-                            <a target="_blank" href="'.route('order.edit', $row->id).'"  class="edit btn btn-light btn-sm"><i class="icon-pencil"></i></a>
-                        </div>
+                    if(auth()->user()->can('order-show')) {
+                        $btn .= '<div class="btn-group">
+                            <a href="'.route('order.print', $row->id).'"  class="show btn btn-light btn-sm"><i class="icon-printer4"></i></a>
+                        </div>';
+                    }
 
-                        <div class="btn-group">
+                    if(auth()->user()->can('order-edit')) {
+                        $btn .= '<div class="btn-group">
+                                <a href="' . route('order.edit', $row->id) . '"  class="edit btn btn-light btn-sm"><i class="icon-pencil"></i></a>
+                            </div>';
+                    }
+
+                    if(auth()->user()->can('order-delete')) {
+                        $btn .= '<div class="btn-group">
                             <a href="'.route('order.destroy', $row->id).'"  class="delete btn btn-light btn-sm"><i class="icon-cross"></i></a>
-                        </div>
-                    </div>';
+                        </div>';
+                    }
+
+                    $btn .= '</div>';
+
                     return $btn;
                 })
                 ->addColumn('country', function ($row) {

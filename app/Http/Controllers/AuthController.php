@@ -18,7 +18,7 @@ class AuthController extends Controller {
     public function attempt(Request $request)
     {
         $rules = [
-            'email'   => 'required|email',
+            'username'   => 'required',
             'password'=> 'required',
             'captcha' => session('attempt', 0) > 2 ? 'required|captcha' : ''
         ];
@@ -29,7 +29,7 @@ class AuthController extends Controller {
 
         $attempt = session('attempt', '0');
 
-        if (Auth::attempt($request->only(['email', 'password']))) {
+        if (Auth::attempt($request->only(['username', 'password']))) {
             session(['attempt' => 0]);
             activity()->log(auth()->user()->name.' sistemə giriş etdi.');
             return redirect()->route('dashboard');

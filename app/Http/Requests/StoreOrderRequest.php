@@ -36,4 +36,25 @@ class StoreOrderRequest extends FormRequest
             'customer'                  => 'required'
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages(): array
+    {
+        return [
+            'temperature.required'          => ' sahəsini doldurmaq zəruridir!',
+            'sample_type.required'          => ' sahəsini doldurmaq zəruridir!',
+            'order_number.required'         => ' sahəsini doldurmaq zəruridir!',
+            'country_id.required'           => ' sahəsini doldurmaq zəruridir!',
+            'package_id.required'           => ' sahəsini doldurmaq zəruridir!',
+            'weight.required'               => ' sahəsini doldurmaq zəruridir!',
+            'production_date.required'      => ' sahəsini doldurmaq zəruridir!',
+            'expire_date.required'          => ' sahəsini doldurmaq zəruridir!',
+            'release_date.required'         => ' sahəsini doldurmaq zəruridir!',
+            'customer.required'             => ' sahəsini doldurmaq zəruridir!'
+        ];
+    }
 }

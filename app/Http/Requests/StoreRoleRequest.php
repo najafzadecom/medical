@@ -21,10 +21,23 @@ class StoreRoleRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'name'                      => 'required'
+            'name'                      => 'required|unique:roles'
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Ad sahəsini doldurmaq zəruridir!',
+            'name.unique'   => 'Bu ad ilə rol artıq bazada mövcuddur!'
         ];
     }
 }

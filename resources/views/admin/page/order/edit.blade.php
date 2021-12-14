@@ -37,7 +37,7 @@
                         <div class="form-group row">
                             <label class="col-form-label col-lg-2">Nümunənin laboratoriyaya daxil olma zamanı temperaturu:</label>
                             <div class="col-lg-10">
-                                <input type="number" min="0" name="temperature" placeholder="Nümunənin laboratoriyaya daxil olma zamanı temperaturu" value="{{ old('temperature', $order->temperature) }}" class="form-control" @hasrole('Laboperator') readonly="readonly" @endrole>
+                                <input type="number" name="temperature" placeholder="Nümunənin laboratoriyaya daxil olma zamanı temperaturu" value="{{ old('temperature', $order->temperature) }}" class="form-control" @hasrole('Laboperator') readonly="readonly" @endrole>
                             </div>
                         </div>
                         <div class="form-group row">

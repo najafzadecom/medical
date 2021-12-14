@@ -27,4 +27,16 @@ class UpdateExperimentRequest extends FormRequest
             'name'  => 'required'
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Ad sahəsini doldurmaq zəruridir!'
+        ];
+    }
 }

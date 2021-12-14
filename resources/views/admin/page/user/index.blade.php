@@ -25,7 +25,7 @@
                 <tr>
                     <th><input type="number" name="primary_key" id="primary_key" class="form-control" placeholder="ID"></th>
                     <th><input type="text" name="name" id="name" class="form-control" placeholder="Adı"></th>
-                    <th><input type="email" name="email" id="email" class="form-control" placeholder="E-mail"></th>
+                    <th><input type="text" name="username" id="username" class="form-control" placeholder="İstifadəçi adı"></th>
                     <th></th>
                 </tr>
                 <tr>
@@ -96,14 +96,14 @@
                         type: 'GET',
                         data: function (d) {
                             d.name = $('#name').val();
-                            d.email = $('#email').val();
+                            d.username = $('#username').val();
                             d.primary_key = $('#primary_key').val();
                         }
                     },
                     columns: [
                         {data: 'id', name: 'id'},
                         {data: 'name', name: 'name'},
-                        {data: 'email', name: 'email'},
+                        {data: 'username', name: 'username'},
                         {data: 'action', name: 'action', orderable: true, searchable: true},
                     ]
                 });
@@ -122,7 +122,7 @@
         });
 
 
-        $('#name, #email, #primary_key, #status').on('keyup change clear', function(){
+        $('#name, #username, #primary_key, #status').on('keyup change clear', function(){
             $('.data-table').DataTable().draw(true);
         });
 

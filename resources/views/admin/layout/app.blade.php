@@ -69,7 +69,7 @@
 
     <ul class="navbar-nav flex-row order-1 order-lg-2 flex-1 flex-lg-0 justify-content-end align-items-center">
 
-
+        @if(auth()->check())
         <li class="nav-item nav-item-dropdown-lg dropdown dropdown-user h-100">
             <a href="#" class="navbar-nav-link navbar-nav-link-toggler dropdown-toggle d-inline-flex align-items-center h-100" data-toggle="dropdown">
                 <img src="{{ auth()->user()->photo ? asset('storage/'.auth()->user()->photo) : asset('admin/global_assets/images/placeholders/placeholder.jpg') }}" class="rounded-pill mr-lg-2" height="34" alt="">
@@ -81,6 +81,7 @@
                 <a href="{{ route('logout') }}" class="dropdown-item"><i class="icon-switch2"></i> Çıxış</a>
             </div>
         </li>
+        @endif
     </ul>
 </div>
 <!-- /main navbar -->

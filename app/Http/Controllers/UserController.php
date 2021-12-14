@@ -20,6 +20,7 @@ class UserController extends Controller
         $this->middleware('permission:user-create', ['only' => ['create','store']]);
         $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
         $this->middleware('permission:user-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:user-show', ['only' => ['show']]);
     }
     /**
      * Display a listing of the resource.
@@ -37,8 +38,8 @@ class UserController extends Controller
                         $query->where('name', 'like', "%" . request('name') . "%");
                     }
 
-                    if (!is_null(request()->get('email'))) {
-                        $query->where('email', 'like', "%" . request('email') . "%");
+                    if (!is_null(request()->get('username'))) {
+                        $query->where('username', 'like', "%" . request('username') . "%");
                     }
 
 
@@ -50,19 +51,28 @@ class UserController extends Controller
                 })->smart(false)->startsWithSearch()
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
-                    $btn = '<div class="btn-group btn-group-justified">
-                        <div class="btn-group">
+                    $btn = '<div class="btn-group btn-group-justified">';
+
+                    if(auth()->user()->can('user-show')) {
+                        $btn .= '<div class="btn-group">
                             <a href="'.route('user.show', $row->id).'"  class="show btn btn-light btn-sm"><i class="icon-eye2"></i></a>
-                        </div>
+                        </div>';
+                    }
 
-                        <div class="btn-group">
-                            <a href="'.route('user.edit', $row->id).'"  class="edit btn btn-light btn-sm"><i class="icon-pencil"></i></a>
-                        </div>
+                    if(auth()->user()->can('user-edit')) {
+                        $btn .= '<div class="btn-group">
+                                <a href="' . route('user.edit', $row->id) . '"  class="edit btn btn-light btn-sm"><i class="icon-pencil"></i></a>
+                            </div>';
+                    }
 
-                        <div class="btn-group">
+                    if(auth()->user()->can('user-delete')) {
+                        $btn .= '<div class="btn-group">
                             <a href="'.route('user.destroy', $row->id).'"  class="delete btn btn-light btn-sm"><i class="icon-cross"></i></a>
-                        </div>
-                    </div>';
+                        </div>';
+                    }
+
+                    $btn .= '</div>';
+
                     return $btn;
                 })
                 ->addColumn('enable', function ($row) {

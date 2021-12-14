@@ -19,10 +19,11 @@ class PackageController extends Controller
 
     public function __construct()
     {
-        $this->middleware('permission:package-list|package-create|package-edit|package-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:package-list|package-create|package-edit|package-delete|package-show', ['only' => ['index','store']]);
         $this->middleware('permission:package-create', ['only' => ['create','store']]);
         $this->middleware('permission:package-edit', ['only' => ['edit','update']]);
         $this->middleware('permission:package-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:package-show', ['only' => ['show']]);
     }
     /**
      * Display a listing of the resource.
@@ -47,19 +48,28 @@ class PackageController extends Controller
                 })->smart(false)->startsWithSearch()
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
-                    $btn = '<div class="btn-group btn-group-justified">
-                        <div class="btn-group">
+                    $btn = '<div class="btn-group btn-group-justified">';
+
+                    if(auth()->user()->can('package-show')) {
+                        $btn .= '<div class="btn-group">
                             <a href="'.route('package.show', $row->id).'"  class="show btn btn-light btn-sm"><i class="icon-eye2"></i></a>
-                        </div>
+                        </div>';
+                    }
 
-                        <div class="btn-group">
-                            <a href="'.route('package.edit', $row->id).'"  class="edit btn btn-light btn-sm"><i class="icon-pencil"></i></a>
-                        </div>
+                    if(auth()->user()->can('package-edit')) {
+                        $btn .= '<div class="btn-group">
+                                <a href="' . route('package.edit', $row->id) . '"  class="edit btn btn-light btn-sm"><i class="icon-pencil"></i></a>
+                            </div>';
+                    }
 
-                        <div class="btn-group">
+                    if(auth()->user()->can('package-delete')) {
+                        $btn .= '<div class="btn-group">
                             <a href="'.route('package.destroy', $row->id).'"  class="delete btn btn-light btn-sm"><i class="icon-cross"></i></a>
-                        </div>
-                    </div>';
+                        </div>';
+                    }
+
+                    $btn .= '</div>';
+
                     return $btn;
                 })
                 ->rawColumns(['action'])

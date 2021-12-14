@@ -24,12 +24,14 @@
                     <th><input type="text" name="description" id="description" class="form-control" placeholder=""></th>
                     <th><input type="text" name="causer" id="causer" class="form-control" placeholder=""></th>
                     <th><input type="text" name="subject" id="subject" class="form-control" placeholder=""></th>
+                    <th><input type="text" name="created_at" id="created_at" class="form-control" placeholder=""></th>
                 </tr>
                 <tr>
                     <th width="150">ID</th>
                     <th>Açıqlama</th>
                     <th>İstifadəçi</th>
                     <th>Subyekt</th>
+                    <th>Tarix</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -102,7 +104,8 @@
                         {data: 'id', name: 'id'},
                         {data: 'description', name: 'description'},
                         {data: 'causer.name', name: 'causer'},
-                        {data: 'subject', name: 'subject', orderable: true, searchable: true},
+                        {data: 'subject', name: 'subject'},
+                        {data: 'created_at', name: 'created_at', orderable: true, searchable: true},
                     ],
                     search: {
                         "regex": true

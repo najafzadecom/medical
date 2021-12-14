@@ -18,10 +18,11 @@ class ExperimentController extends Controller
 
     public function __construct()
     {
-        $this->middleware('permission:experiment-list|experiment-create|experiment-edit|experiment-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:experiment-list|experiment-create|experiment-edit|experiment-delete|experiment-show', ['only' => ['index','store']]);
         $this->middleware('permission:experiment-create', ['only' => ['create','store']]);
         $this->middleware('permission:experiment-edit', ['only' => ['edit','update']]);
         $this->middleware('permission:experiment-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:experiment-show', ['only' => ['show']]);
     }
     /**
      * Display a listing of the resource.
@@ -50,19 +51,28 @@ class ExperimentController extends Controller
                 })->smart(false)->startsWithSearch()
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
-                    $btn = '<div class="btn-group btn-group-justified">
-                        <div class="btn-group">
+                    $btn = '<div class="btn-group btn-group-justified">';
+
+                    if(auth()->user()->can('experiment-show')) {
+                        $btn .= '<div class="btn-group">
                             <a href="'.route('experiment.show', $row->id).'"  class="show btn btn-light btn-sm"><i class="icon-eye2"></i></a>
-                        </div>
+                        </div>';
+                    }
 
-                        <div class="btn-group">
-                            <a href="'.route('experiment.edit', $row->id).'"  class="edit btn btn-light btn-sm"><i class="icon-pencil"></i></a>
-                        </div>
+                    if(auth()->user()->can('experiment-edit')) {
+                        $btn .= '<div class="btn-group">
+                                <a href="' . route('experiment.edit', $row->id) . '"  class="edit btn btn-light btn-sm"><i class="icon-pencil"></i></a>
+                            </div>';
+                    }
 
-                        <div class="btn-group">
+                    if(auth()->user()->can('experiment-delete')) {
+                        $btn .= '<div class="btn-group">
                             <a href="'.route('experiment.destroy', $row->id).'"  class="delete btn btn-light btn-sm"><i class="icon-cross"></i></a>
-                        </div>
-                    </div>';
+                        </div>';
+                    }
+
+                    $btn .= '</div>';
+
                     return $btn;
                 })
                 ->addColumn('type_name', function($row){

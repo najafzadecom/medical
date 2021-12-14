@@ -27,9 +27,9 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-form-label col-lg-2">E-mail</label>
+                            <label class="col-form-label col-lg-2">İstifadəçi adı</label>
                             <div class="col-lg-10">
-                                <input type="email" name="email" placeholder="E-mail" value="{{ old('email') }}" class="form-control">
+                                <input type="text" name="username" placeholder="İstifadəçi adı" value="{{ old('username') }}" class="form-control">
                             </div>
                         </div>
                         <div class="form-group row">

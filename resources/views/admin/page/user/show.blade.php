@@ -12,8 +12,8 @@
                 </div>
 
                 <div class="d-sm-flex flex-sm-wrap mb-3">
-                    <div class="font-weight-semibold width-100">E-mail:</div>
-                    <div class="mt-2 mt-sm-0">{{ $user->email }}</div>
+                    <div class="font-weight-semibold width-100">İstifadəçi adı:</div>
+                    <div class="mt-2 mt-sm-0">{{ $user->username }}</div>
                 </div>
 
                 <div class="d-sm-flex flex-sm-wrap mb-3">
