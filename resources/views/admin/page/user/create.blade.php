@@ -51,7 +51,7 @@
                         <div class="form-group row">
                             <label class="col-form-label col-lg-2">Şifrə təkrarı</label>
                             <div class="col-lg-10">
-                                <input type="password" name="password_confirm" placeholder="Şifrə təkrarı" value="" class="form-control">
+                                <input type="password" name="password_confirmation" placeholder="Şifrə təkrarı" value="" class="form-control">
                             </div>
                         </div>
                         <div class="form-group row">
