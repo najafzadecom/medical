@@ -69,13 +69,13 @@
                         <div class="form-group row">
                             <label class="col-form-label col-lg-2">Nümunənin istehsal tarixi:</label>
                             <div class="col-lg-10">
-                                <input type="date" name="production_date" value="{{ old('production_date') }}" class="form-control">
+                                <input type="text" name="production_date" value="{{ old('production_date') }}" class="form-control  daterange-single">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-form-label col-lg-2">Nümunənin son istifadə tarixi:</label>
                             <div class="col-lg-10">
-                                <input type="date" name="expire_date" value="{{ old('expire_date') }}" class="form-control">
+                                <input type="text" name="expire_date" value="{{ old('expire_date') }}" class="form-control  daterange-single">
                             </div>
                         </div>
                         <div class="form-group row">
