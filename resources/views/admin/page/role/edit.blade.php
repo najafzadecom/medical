@@ -29,6 +29,13 @@
                     </div>
 
                     <div class="form-group row">
+                        <label class="col-form-label col-lg-2">Rəng</label>
+                        <div class="col-lg-10">
+                            <input type="color" name="color" placeholder="#252b36" value="{{ old('color', $role->color) }}" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
                         <label class="col-form-label col-lg-2">İcazələr</label>
                         <div class="col-lg-10">
                             @if(!$permissions->isEmpty())

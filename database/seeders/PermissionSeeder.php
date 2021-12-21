@@ -26,7 +26,6 @@ class PermissionSeeder extends Seeder
             }
         }
 
-
         $roles = Role::where('id', 1)->get();
         $permissions = Permission::get()->pluck('id');
         if(!$roles->isEmpty()) {

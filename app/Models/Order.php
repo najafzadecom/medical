@@ -26,8 +26,8 @@ class Order extends Model
         'status',
         'created_by',
         'updated_by',
-        'protocol',
-        'experiments'
+        'experiments',
+        'result'
     ];
 
     protected $casts = [
@@ -50,7 +50,6 @@ class Order extends Model
         'status',
         'created_by',
         'updated_by',
-        'protocol',
         'experiments'
     ];
 

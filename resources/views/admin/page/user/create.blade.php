@@ -35,7 +35,7 @@
                         <div class="form-group row">
                             <label class="col-form-label col-lg-2">Rol</label>
                             <div class="col-lg-10">
-                               <select name="roles[]" class="select-search" multiple="multiple">
+                               <select name="roles[]" class="select-search">
                                    @foreach($roles as $role)
                                     <option @if(in_array($role->id, old('roles', []))) selected="selected" @endif value="{{ $role->id }}">{{ $role->name }}</option>
                                    @endforeach

@@ -31,7 +31,7 @@
                         <div class="form-group row">
                             <label class="col-form-label col-lg-2">Nümunənin qəbul tarixi/vaxtı:</label>
                             <div class="col-lg-10">
-                                <input type="datetime-local" name="date" placeholder="Nümunənin qəbul tarixi/vaxtı" value="{{ old('date', $order->date) }}" class="form-control" readonly="readonly">
+                                <input type="text" name="date" placeholder="Nümunənin qəbul tarixi/vaxtı" value="{{ old('date', $order->date) }}" class="form-control" readonly="readonly">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -77,19 +77,19 @@
                         <div class="form-group row">
                             <label class="col-form-label col-lg-2">Nümunənin miqdarı:</label>
                             <div class="col-lg-10">
-                                <input type="number" name="weight" placeholder="Nümunənin miqdarı" value="{{ old('weight', $order->weight) }}" class="form-control" @hasrole('Laboperator') readonly="readonly" @endrole>
+                                <input type="text" name="weight" placeholder="Nümunənin miqdarı" value="{{ old('weight', $order->weight) }}" class="form-control" @hasrole('Laboperator') readonly="readonly" @endrole>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-form-label col-lg-2">Nümunənin istehsal tarixi:</label>
                             <div class="col-lg-10">
-                                <input type="date" name="production_date" value="{{ old('production_date', $order->production_date) }}" class="form-control" @hasrole('Laboperator') readonly="readonly" @endrole>
+                                <input type="text" name="production_date" value="{{ old('production_date', $order->production_date) }}" class="form-control daterange-single" @hasrole('Laboperator') readonly="readonly" @endrole>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-form-label col-lg-2">Nümunənin son istifadə tarixi:</label>
                             <div class="col-lg-10">
-                                <input type="date" name="expire_date" value="{{ old('expire_date', $order->expire_date) }}" class="form-control" @hasrole('Laboperator') readonly="readonly" @endrole>
+                                <input type="text" name="expire_date" value="{{ old('expire_date', $order->expire_date) }}" class="form-control daterange-single"  @hasrole('Laboperator') readonly="readonly" @endrole>
                             </div>
                         </div>
 
@@ -97,7 +97,7 @@
                         <div class="form-group row">
                             <label class="col-form-label col-lg-2">Sınaq protokolunun çıxma tarixi:</label>
                             <div class="col-lg-10">
-                                <input type="date" name="release_date" value="{{ old('release_date', $order->release_date) }}" class="form-control">
+                                <input type="text" name="release_date" value="{{ old('release_date', $order->release_date) }}" class="form-control daterange-single">
                             </div>
                         </div>
                         @endrole
@@ -108,14 +108,6 @@
                                 <input type="text" name="customer" value="{{ old('customer', $order->customer) }}" class="form-control" @hasrole('Laboperator') readonly="readonly" @endrole>
                             </div>
                         </div>
-                        @hasanyrole('Manager|Laboperator')
-                        <div class="form-group row">
-                            <label class="col-form-label col-lg-2">Prokotol:</label>
-                            <div class="col-lg-10">
-                                <input type="text" name="protocol" value="{{ old('protocol', $order->protocol) }}" class="form-control">
-                            </div>
-                        </div>
-                        @endrole
 
                         <div class="form-group row">
                             <label class="col-form-label col-lg-2">Barkod:</label>
@@ -139,6 +131,39 @@
                             @endforeach
                         </div>
                     </fieldset>
+                    @hasanyrole('Manager|Laboperator')
+                    <hr/>
+                    <fieldset>
+                        <div class="text-center"><h1>SINAQLARIN NƏTİCƏLƏRİ</h1></div>
+                        <table class="table table-bordered table-hover">
+                            <tr>
+                                <td colspan=2 rowspan=2><strong>Göstəricilərin adı</strong></td>
+                                <td rowspan=2><strong>Vahid</strong></td>
+                                <td rowspan=2><strong>Metod</strong></td>
+                                <td colspan="2">
+                                    <strong>Normativ tələblər</strong>
+                                </td>
+                                <td rowspan=2><strong>Nəticə</strong></td>
+                                <td rowspan=2><strong>Qeyd</strong></td>
+                            </tr>
+                            <tr>
+                                <td rowspan=1><strong>Məhsula dair normativ sənədin adı, nişanı və bəndi</strong></td>
+                                <td rowspan=1><strong>Normativə görə göstəricisi</strong></td>
+                            </tr>
+                            @foreach($order->experiments as $experimento)
+                            <tr>
+                                <td colspan=2><strong>{{ \App\Models\Experiment::where('id', $experimento)->first()->name }}</sup></strong></td>
+                                <td><input type="text" name="result[{{ $experimento }}][1]" placeholder="" value="{{ old('result.'.$experimento.'.1', $result[$experimento][1]) }}" class="form-control"/></td>
+                                <td><input type="text" name="result[{{ $experimento }}][2]" placeholder="" value="{{ old('result.'.$experimento.'.2', $result[$experimento][2]) }}" class="form-control"/></td>
+                                <td><input type="text" name="result[{{ $experimento }}][3]" placeholder="" value="{{ old('result.'.$experimento.'.3', $result[$experimento][3]) }}" class="form-control"/></td>
+                                <td><input type="text" name="result[{{ $experimento }}][4]" placeholder="" value="{{ old('result.'.$experimento.'.4', $result[$experimento][4]) }}" class="form-control"/></td>
+                                <td><input type="text" name="result[{{ $experimento }}][5]" placeholder="" value="{{ old('result.'.$experimento.'.5', $result[$experimento][5]) }}" class="form-control"/></td>
+                                <td><input type="text" name="result[{{ $experimento }}][6]" placeholder="" value="{{ old('result.'.$experimento.'.6', $result[$experimento][6]) }}" class="form-control"/></td>
+                            </tr>
+                            @endforeach
+                        </table>
+                    </fieldset>
+                    @endrole
 
                     <div class="text-right">
                         <button type="submit" class="btn btn-primary">Yadda saxla</button>

@@ -49,4 +49,12 @@ return [
      * Laravel database.default will be used instead.
      */
     'database_connection' => env('ACTIVITY_LOGGER_DB_CONNECTION'),
+
+    'subject_types' => [
+        'App\Models\User'       => 'İstifadəçilər',
+        'App\Models\Order'      => 'Sifarişlər',
+        'App\Models\Experiment' => 'Nümunədə aparılacaq sınaqlar',
+        'App\Models\Package'    => 'Qablaşdırma',
+        ''                      => 'Digər'
+    ],
 ];

@@ -24,6 +24,7 @@
                     <th><input type="text" name="description" id="description" class="form-control" placeholder=""></th>
                     <th><input type="text" name="causer" id="causer" class="form-control" placeholder=""></th>
                     <th><input type="text" name="subject" id="subject" class="form-control" placeholder=""></th>
+                    <th><input type="text" name="subject_type" id="subject_type" class="form-control" placeholder=""></th>
                     <th><input type="text" name="created_at" id="created_at" class="form-control" placeholder=""></th>
                 </tr>
                 <tr>
@@ -31,6 +32,7 @@
                     <th>Açıqlama</th>
                     <th>İstifadəçi</th>
                     <th>Subyekt</th>
+                    <th>Subyektin növü</th>
                     <th>Tarix</th>
                 </tr>
                 </thead>
@@ -105,6 +107,7 @@
                         {data: 'description', name: 'description'},
                         {data: 'causer.name', name: 'causer'},
                         {data: 'subject', name: 'subject'},
+                        {data: 'subject_type', name: 'subject_type'},
                         {data: 'created_at', name: 'created_at', orderable: true, searchable: true},
                     ],
                     search: {

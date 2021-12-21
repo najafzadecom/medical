@@ -54,12 +54,7 @@
                     <div class="font-weight-semibold width-100">Sifarişçi: </div>
                     <div class="mt-2 mt-sm-0">{{ $order->customer }}</div>
                 </div>
-                @hasanyrole('Manager|Laboperator')
-                <div class="d-sm-flex flex-sm-wrap mb-3">
-                    <div class="font-weight-semibold width-100">Protokol: </div>
-                    <div class="mt-2 mt-sm-0">{{ $order->protocol }}</div>
-                </div>
-                @endrole
+
                 <div class="d-sm-flex flex-sm-wrap mb-3">
                     <div class="font-weight-semibold width-100">Barkod: </div>
                     <div class="mt-2 mt-sm-0">{!! DNS1D::getBarcodeHTML($order->number, 'UPCA') !!}</div>
@@ -79,6 +74,39 @@
                         @endif
                     </div>
                 </div>
+
+                @hasanyrole('Manager|Laboperator')
+                <fieldset>
+                    <div class="text-center"><h1>SINAQLARIN NƏTİCƏLƏRİ</h1></div>
+                    <table class="table table-bordered table-hover">
+                        <tr>
+                            <td colspan=2 rowspan=2><strong>Göstəricilərin adı</strong></td>
+                            <td rowspan=2><strong>Vahid</strong></td>
+                            <td rowspan=2><strong>Metod</strong></td>
+                            <td colspan="2">
+                                <strong>Normativ tələblər</strong>
+                            </td>
+                            <td rowspan=2><strong>Nəticə</strong></td>
+                            <td rowspan=2><strong>Qeyd</strong></td>
+                        </tr>
+                        <tr>
+                            <td rowspan=1><strong>Məhsula dair normativ sənədin adı, nişanı və bəndi</strong></td>
+                            <td rowspan=1><strong>Normativə görə göstəricisi</strong></td>
+                        </tr>
+                        @foreach($order->experiments as $experimento)
+                            <tr>
+                                <td colspan=2><strong>{{ \App\Models\Experiment::where('id', $experimento)->first()->name }}</sup></strong></td>
+                                <td><input disabled="disabled" type="text" name="result[{{ $experimento }}][1]" placeholder="" value="{{ old('result.'.$experimento.'.1', $result[$experimento][1]) }}" class="form-control"/></td>
+                                <td><input disabled="disabled" type="text" name="result[{{ $experimento }}][2]" placeholder="" value="{{ old('result.'.$experimento.'.2', $result[$experimento][2]) }}" class="form-control"/></td>
+                                <td><input disabled="disabled" type="text" name="result[{{ $experimento }}][3]" placeholder="" value="{{ old('result.'.$experimento.'.3', $result[$experimento][3]) }}" class="form-control"/></td>
+                                <td><input disabled="disabled" type="text" name="result[{{ $experimento }}][4]" placeholder="" value="{{ old('result.'.$experimento.'.4', $result[$experimento][4]) }}" class="form-control"/></td>
+                                <td><input disabled="disabled" type="text" name="result[{{ $experimento }}][5]" placeholder="" value="{{ old('result.'.$experimento.'.5', $result[$experimento][5]) }}" class="form-control"/></td>
+                                <td><input disabled="disabled" type="text" name="result[{{ $experimento }}][6]" placeholder="" value="{{ old('result.'.$experimento.'.6', $result[$experimento][6]) }}" class="form-control"/></td>
+                            </tr>
+                        @endforeach
+                    </table>
+                </fieldset>
+                @endrole
 
             </div>
         </div>

@@ -27,8 +27,8 @@ class CreateOrdersTable extends Migration
             $table->date('expire_date')->nullable();
             $table->date('release_date')->nullable();
             $table->string('customer', 255)->nullable();
-            $table->text('protocol')->nullable();
             $table->text('experiments')->nullable();
+            $table->text('result')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->bigInteger('created_by')->default(0);
             $table->bigInteger('updated_by')->default(0);

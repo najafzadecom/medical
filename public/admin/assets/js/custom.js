@@ -77,3 +77,32 @@ $( document ).ready(function() {
         });
     });
 });
+
+var DateTimePickers = function() {
+
+    var _componentDaterange = function() {
+        if (!$().daterangepicker) {
+            console.warn('Warning - daterangepicker.js is not loaded.');
+            return;
+        }
+
+        $('.daterange-single').daterangepicker({
+            parentEl: '.content-inner',
+            singleDatePicker: true,
+            locale: {
+                format: 'DD-MM-YYYY'
+            }
+        });
+    };
+
+
+    return {
+        init: function() {
+            _componentDaterange();
+        }
+    }
+}();
+
+document.addEventListener('DOMContentLoaded', function() {
+    DateTimePickers.init();
+});

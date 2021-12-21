@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Package;
+use App\Models\Country;
 use Illuminate\Database\Seeder;
 
-class PackageSeeder extends Seeder
+class CountrySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,8 +14,8 @@ class PackageSeeder extends Seeder
      */
     public function run()
     {
-        $package = Package::create([
-            'name'                  => 'Şüşə'
+        $country = Country::create([
+            'name'                  => 'Azərbaycan'
         ]);
     }
 }

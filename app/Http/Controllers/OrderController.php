@@ -166,7 +166,20 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        return view('admin.page.order.show', compact('order'));
+
+        $experiments = [];
+        foreach (config('app.experiment_type') as $key => $value) {
+            $experiments[$key] = Experiment::where('type', $key)->get();
+        }
+
+        $result = json_decode($order->result, true);
+        if(!$result) {
+            foreach ($order->experiments as $exp) {
+                $result[$exp] = ['', '', '', '', '', '', ''];
+            }
+        }
+
+        return view('admin.page.order.show', compact('order', 'experiments', 'result'));
     }
 
     /**
@@ -185,7 +198,14 @@ class OrderController extends Controller
             $experiments[$key] = Experiment::where('type', $key)->get();
         }
 
-        return view('admin.page.order.edit', compact('order', 'countries', 'packages', 'experiments'));
+        $result = json_decode($order->result, true);
+        if(!$result) {
+            foreach ($order->experiments as $exp) {
+                $result[$exp] = ['', '', '', '', '', '', ''];
+            }
+        }
+
+        return view('admin.page.order.edit', compact('order', 'countries', 'packages', 'experiments', 'result'));
     }
 
     /**
@@ -203,6 +223,8 @@ class OrderController extends Controller
         if(!isset($input['experiments'])) {
             $input['experiments'] = [];
         }
+
+        $input['result'] = json_encode($request->get('result'), JSON_PRETTY_PRINT);
 
         $order->update($input);
         return redirect()->route('order.index')->with(['message' => 'Müvəffəqiyyətlə yeniləndi.']);
