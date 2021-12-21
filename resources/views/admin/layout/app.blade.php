@@ -50,7 +50,7 @@
 <body>
 
 <!-- Main navbar -->
-<div class="navbar navbar-expand-lg navbar-dark navbar-static">
+<div class="navbar navbar-expand-lg navbar-dark navbar-static" style="background-color: {{ auth()->user()->roles->pluck('color')->toArray()[0] ?? "#252b36" }} !important;">
     <div class="d-flex flex-1 d-lg-none">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-mobile">
             <i class="icon-paragraph-justify3"></i>
@@ -92,7 +92,7 @@
 
 
     <!-- Main sidebar -->
-    <div class="sidebar sidebar-dark sidebar-main sidebar-expand-lg sidebar-main-resized">
+    <div class="sidebar sidebar-dark sidebar-main sidebar-expand-lg sidebar-main-resized" style="background-color: {{ auth()->user()->roles->pluck('color')->toArray()[0] ?? "#252b36" }} !important;">
 
         <!-- Sidebar content -->
         <div class="sidebar-content">
