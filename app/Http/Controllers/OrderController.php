@@ -147,6 +147,8 @@ class OrderController extends Controller
         $input['date'] = date('Y-m-d H:i:s');
         $input['created_by'] = auth()->user()->id;
         $input['updated_by'] = auth()->user()->id;
+        $input['production_date'] = date('Y-m-d', strtotime($input['production_date']));
+        $input['expiry_date'] = date('Y-m-d', strtotime($input['expiry_date']));
 
         if(!isset($input['experiments'])) {
             $input['experiments'] = [];
@@ -219,6 +221,9 @@ class OrderController extends Controller
     {
         $input = $request->all();
         $input['updated_by'] = auth()->user()->id;
+
+        $input['production_date'] = date('Y-m-d', strtotime($input['production_date']));
+        $input['expiry_date'] = date('Y-m-d', strtotime($input['expiry_date']));
 
         if(!isset($input['experiments'])) {
             $input['experiments'] = [];
