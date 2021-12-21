@@ -224,6 +224,7 @@ class OrderController extends Controller
 
         $input['production_date'] = date('Y-m-d', strtotime($input['production_date']));
         $input['expire_date'] = date('Y-m-d', strtotime($input['expire_date']));
+        $input['release_date'] = $input['release_date'] ? date('Y-m-d', strtotime($input['release_date'])) : null;
 
         if(!isset($input['experiments'])) {
             $input['experiments'] = [];
