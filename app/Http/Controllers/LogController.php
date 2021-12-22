@@ -57,7 +57,14 @@ class LogController extends Controller
                     return $row->subject_type ? config('activitylog.subject_types')[$row->subject_type] : 'Digər';
                 })
                 ->addColumn('description', function ($row) {
-                    return $row->description == 'created' ? 'Yaratdı' : $row->description == 'updated' ? 'Yenilədi' : $row->description;
+                    if($row->description == 'created') {
+                        return  'Yaratdı';
+                    }
+                    elseif($row->description == 'updated') {
+                        return 'Yenilədi';
+                    } else {
+                        return $row->description;
+                    }
                 })
                 ->rawColumns(['action', 'subject'])
                 ->toJson();
