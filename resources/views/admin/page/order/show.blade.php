@@ -57,7 +57,7 @@
 
                 <div class="d-sm-flex flex-sm-wrap mb-3">
                     <div class="font-weight-semibold width-100">Barkod: </div>
-                    <div class="mt-2 mt-sm-0">{!! DNS1D::getBarcodeHTML($order->number, 'UPCA') !!}</div>
+                    <div class="mt-2 mt-sm-0">{!! DNS1D::getBarcodeHTML($order->number, 'C39') !!}</div>
                 </div>
 
                 <div class="d-sm-flex flex-sm-wrap mb-3">

@@ -108,7 +108,7 @@ class OrderController extends Controller
                     return $row->package ? $row->package->name : '';
                 })
                 ->addColumn('barcode', function ($row) {
-                    return DNS1DFacade::getBarcodeHTML($row->number, 'UPCA');
+                    return DNS1DFacade::getBarcodeHTML($row->number, 'C39');
                 })
                 ->rawColumns(['action', 'barcode'])
                 ->toJson();
