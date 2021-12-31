@@ -7,7 +7,7 @@
     <title>Print</title>
 </head>
 <body>
-{!! DNS1D::getBarcodeHTML($order->number, 'C39', 2, 30, 'black', true) !!}
+<img src="data:image/png;base64, {!! DNS1D::getBarcodePNG($order->number, 'C39', 2, 30, array(0, 0, 0), true) !!}"/>
 <script type="text/javascript">
     window.onload = function() { window.print();window.close(); }
 </script>
