@@ -6,8 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Print</title>
 </head>
+<style>
+    body {
+        text-align: center;
+    }
+    .printable {
+        margin: 30px auto 0;
+    }
+</style>
 <body>
-<img src="data:image/png;base64, {!! DNS1D::getBarcodePNG($order->number, 'C39', 2, 30, array(0, 0, 0), true) !!}" />
+<div class="printable">
+    {!! DNS1D::getBarcodeSVG($order->number, 'C128') !!}
+</div>
+
 <script type="text/javascript">
     window.onload = function() { window.print(); }
 </script>

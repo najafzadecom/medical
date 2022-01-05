@@ -112,7 +112,7 @@
                         <div class="form-group row">
                             <label class="col-form-label col-lg-2">Barkod:</label>
                             <div class="col-lg-10">
-                                {!! DNS1D::getBarcodeHTML($order->number, 'C39') !!}
+                                {!! DNS1D::getBarcodeHTML($order->number, 'C128') !!}
                             </div>
                         </div>
                     </fieldset>
